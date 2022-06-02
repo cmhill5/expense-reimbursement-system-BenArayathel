@@ -72,6 +72,7 @@ public class RequestDaoImpl implements RequestDao {
 		
 		Connection connection = ConnectionFactory.getConnection();
 		List<Request> requestList = new ArrayList<>();
+		Request req = new Request();
 		
 		try (PreparedStatement ps = connection.prepareStatement(sql)) {
 			
@@ -79,7 +80,7 @@ public class RequestDaoImpl implements RequestDao {
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				Request req = new Request(
+				req = new Request(
 						rs.getInt(ID),
 						rs.getTimestamp(SENTTIME),
 						rs.getString(CATEGORY).trim(),
@@ -104,13 +105,14 @@ public class RequestDaoImpl implements RequestDao {
 		
 		Connection connection = ConnectionFactory.getConnection();
 		List<Request> requestList = new ArrayList<>();
+		Request req = new Request();
 		
 		try (PreparedStatement ps = connection.prepareStatement(sql)) {
 			
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				Request req = new Request(
+				req = new Request(
 						rs.getInt(ID),
 						rs.getTimestamp(SENTTIME),
 						rs.getString(CATEGORY).trim(),

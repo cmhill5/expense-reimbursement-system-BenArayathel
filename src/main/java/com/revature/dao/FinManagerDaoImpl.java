@@ -83,12 +83,13 @@ public class FinManagerDaoImpl implements FinManagerDao {
 		Connection connection = ConnectionFactory.getConnection();
 		
 		List<FinManager> finmanagerList = new ArrayList<>();
+		FinManager fin = new FinManager();
 		
 		try (PreparedStatement ps = connection.prepareStatement(sql)) {
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				FinManager emp = new FinManager(
+				fin = new FinManager(
 						rs.getInt(ID),
 						rs.getString(USERNAME).trim(),
 						rs.getString(PASSWORD).trim(),
@@ -96,7 +97,7 @@ public class FinManagerDaoImpl implements FinManagerDao {
 						rs.getString(LASTNAME).trim()
 						);
 				
-				finmanagerList.add(emp);
+				finmanagerList.add(fin);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

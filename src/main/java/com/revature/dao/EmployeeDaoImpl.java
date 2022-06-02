@@ -83,12 +83,13 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		Connection connection = ConnectionFactory.getConnection();
 		
 		List<Employee> employeeList = new ArrayList<>();
+		Employee emp = new Employee();
 		
 		try (PreparedStatement ps = connection.prepareStatement(sql)) {
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				Employee emp = new Employee(
+				emp = new Employee(
 						rs.getInt(ID),
 						rs.getString(USERNAME).trim(),
 						rs.getString(PASSWORD).trim(),

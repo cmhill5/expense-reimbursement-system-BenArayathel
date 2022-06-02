@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.postgresql.util.PSQLException;
+
 import com.revature.models.Employee;
 import com.revature.util.ConnectionFactory;
 
@@ -36,6 +38,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 					rs.getString(PASSWORD).trim(),
 					rs.getString(FIRSTNAME).trim(),
 					rs.getString(LASTNAME).trim(),
+					null,
 					null
 					);
 			
@@ -66,9 +69,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
 					rs.getString(PASSWORD).trim(),
 					rs.getString(FIRSTNAME).trim(),
 					rs.getString(LASTNAME).trim(),
+					null,
 					null
 					);
 			
+		} catch (PSQLException psqlE) {
+			emp = null;
 		} catch (Exception e) {
 			e.printStackTrace();
 			emp = null;
@@ -95,6 +101,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 						rs.getString(PASSWORD).trim(),
 						rs.getString(FIRSTNAME).trim(),
 						rs.getString(LASTNAME).trim(),
+						null,
 						null
 						);
 				

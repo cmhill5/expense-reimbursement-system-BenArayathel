@@ -1,5 +1,8 @@
 package com.revature.models;
 
+import java.util.List;
+import java.util.Objects;
+
 public class FinManager {
 
 	private int id;
@@ -7,17 +10,19 @@ public class FinManager {
 	private String password;
 	private String firstName;
 	private String lastName;
+	private List<Log> myLogs;
 	public FinManager() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public FinManager(int id, String username, String password, String firstName, String lastName) {
+	public FinManager(int id, String username, String password, String firstName, String lastName, List<Log> myLogs) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.myLogs = myLogs;
 	}
 	public int getId() {
 		return id;
@@ -49,21 +54,20 @@ public class FinManager {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+	public List<Log> getMyLogs() {
+		return myLogs;
+	}
+	public void setMyLogs(List<Log> myLogs) {
+		this.myLogs = myLogs;
+	}
 	@Override
 	public String toString() {
-		return "\nFinManager [id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName
-				+ ", lastName=" + lastName + "]";
+		return "FinManager [id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName
+				+ ", lastName=" + lastName + ", myLogs=" + myLogs + "]";
 	}
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + id;
-		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((username == null) ? 0 : username.hashCode());
-		return result;
+		return Objects.hash(firstName, id, lastName, myLogs, password, username);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -74,29 +78,9 @@ public class FinManager {
 		if (getClass() != obj.getClass())
 			return false;
 		FinManager other = (FinManager) obj;
-		if (firstName == null) {
-			if (other.firstName != null)
-				return false;
-		} else if (!firstName.equals(other.firstName))
-			return false;
-		if (id != other.id)
-			return false;
-		if (lastName == null) {
-			if (other.lastName != null)
-				return false;
-		} else if (!lastName.equals(other.lastName))
-			return false;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
-		if (username == null) {
-			if (other.username != null)
-				return false;
-		} else if (!username.equals(other.username))
-			return false;
-		return true;
+		return Objects.equals(firstName, other.firstName) && id == other.id && Objects.equals(lastName, other.lastName)
+				&& Objects.equals(myLogs, other.myLogs) && Objects.equals(password, other.password)
+				&& Objects.equals(username, other.username);
 	}
 	
 }

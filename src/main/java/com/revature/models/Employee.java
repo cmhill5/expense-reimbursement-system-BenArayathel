@@ -1,6 +1,7 @@
 package com.revature.models;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Employee {
 
@@ -10,12 +11,13 @@ public class Employee {
 	private String firstName;
 	private String lastName;
 	private List<Request> myRequests;
+	private List<Log> myLogs;
 	public Employee() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public Employee(int id, String username, String password, String firstName, String lastName,
-			List<Request> myRequests) {
+			List<Request> myRequests, List<Log> myLogs) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -23,6 +25,7 @@ public class Employee {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.myRequests = myRequests;
+		this.myLogs = myLogs;
 	}
 	public int getId() {
 		return id;
@@ -60,22 +63,20 @@ public class Employee {
 	public void setMyRequests(List<Request> myRequests) {
 		this.myRequests = myRequests;
 	}
+	public List<Log> getMyLogs() {
+		return myLogs;
+	}
+	public void setMyLogs(List<Log> myLogs) {
+		this.myLogs = myLogs;
+	}
 	@Override
 	public String toString() {
 		return "\nEmployee [id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", myRequests=" + myRequests + "]";
+				+ ", lastName=" + lastName + ", myRequests=" + myRequests + ", myLogs=" + myLogs + "]";
 	}
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + id;
-		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-		result = prime * result + ((myRequests == null) ? 0 : myRequests.hashCode());
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((username == null) ? 0 : username.hashCode());
-		return result;
+		return Objects.hash(firstName, id, lastName, myLogs, myRequests, password, username);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -86,34 +87,9 @@ public class Employee {
 		if (getClass() != obj.getClass())
 			return false;
 		Employee other = (Employee) obj;
-		if (firstName == null) {
-			if (other.firstName != null)
-				return false;
-		} else if (!firstName.equals(other.firstName))
-			return false;
-		if (id != other.id)
-			return false;
-		if (lastName == null) {
-			if (other.lastName != null)
-				return false;
-		} else if (!lastName.equals(other.lastName))
-			return false;
-		if (myRequests == null) {
-			if (other.myRequests != null)
-				return false;
-		} else if (!myRequests.equals(other.myRequests))
-			return false;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
-		if (username == null) {
-			if (other.username != null)
-				return false;
-		} else if (!username.equals(other.username))
-			return false;
-		return true;
+		return Objects.equals(firstName, other.firstName) && id == other.id && Objects.equals(lastName, other.lastName)
+				&& Objects.equals(myLogs, other.myLogs) && Objects.equals(myRequests, other.myRequests)
+				&& Objects.equals(password, other.password) && Objects.equals(username, other.username);
 	}
 	
 }

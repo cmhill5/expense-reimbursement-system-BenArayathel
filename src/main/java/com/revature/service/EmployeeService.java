@@ -18,7 +18,7 @@ public class EmployeeService {
 	private static EmployeeDao empDao = new EmployeeDaoImpl();
 	private static RequestDao reqDao = new RequestDaoImpl();
 	private static LogDao lDao = new LogDaoImpl();
-	private static AuthenticationService auth = new AuthenticationServiceImpl();
+	private static SystemService sysServ = new SystemServiceImpl();
 	
 	public boolean employeeLogin(String user, String pass) {
 		boolean result = false;
@@ -27,7 +27,7 @@ public class EmployeeService {
 		if(emp == null) {
 			System.out.println("ERROR: No Employee by this Username");
 		}
-		else if(auth.authenticateEmp(emp, pass)) {
+		else if(sysServ.authenticateEmp(emp, pass)) {
 			result = true;
 		}
 		
@@ -67,6 +67,19 @@ public class EmployeeService {
 		for(Request req: requestList) {
 			System.out.println(req);
 		}
+	}
+	
+	public void makeRequest(Employee emp, String category, double balance) {
+		if(!sysServ.validateCategory(category)) {
+			return;
+		}
+		if(!sysServ.validateBalance(balance)) {
+			return;
+		}
+		
+		Request req = new Request(category, balance, emp.getId());
+		
+		reqDao.insertRequest(req);
 	}
 	
 	public void viewLogs(Employee emp) {

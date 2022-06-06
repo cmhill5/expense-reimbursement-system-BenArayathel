@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.revature.models.Employee;
+import com.revature.models.Log;
 import com.revature.models.Request;
 import com.revature.util.ConnectionFactory;
 
@@ -97,6 +98,35 @@ public class RequestDaoImpl implements RequestDao {
 		}
 		
 		return requestList;
+	}
+
+	@Override
+	public Request selectOldestRequest() {
+		String sql = "SELECT * FROM requests WHERE senttime = (SELECT MIN(senttime) FROM requests)";
+		Connection connection = ConnectionFactory.getConnection();
+
+		Request req = new Request();
+		
+		try (PreparedStatement ps = connection.prepareStatement(sql)) {
+
+			ResultSet rs = ps.executeQuery();
+			
+			rs.next();
+			
+			req = new Request(
+					rs.getInt(ID),
+					rs.getTimestamp(SENTTIME),
+					rs.getString(CATEGORY).trim(),
+					rs.getInt(BALANCE)*0.01,
+					rs.getInt(EMP_ID)
+					);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			req = null;
+		}
+		
+		return req;
 	}
 
 	@Override

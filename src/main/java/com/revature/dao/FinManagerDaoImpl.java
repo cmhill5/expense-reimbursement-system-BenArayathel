@@ -36,8 +36,7 @@ public class FinManagerDaoImpl implements FinManagerDao {
 					rs.getString(USERNAME).trim(),
 					rs.getString(PASSWORD).trim(),
 					rs.getString(FIRSTNAME).trim(),
-					rs.getString(LASTNAME).trim(),
-					null
+					rs.getString(LASTNAME).trim()
 					);
 			
 		} catch (Exception e) {
@@ -67,8 +66,7 @@ public class FinManagerDaoImpl implements FinManagerDao {
 					rs.getString(USERNAME).trim(),
 					rs.getString(PASSWORD).trim(),
 					rs.getString(FIRSTNAME).trim(),
-					rs.getString(LASTNAME).trim(),
-					null
+					rs.getString(LASTNAME).trim()
 					);
 			
 		} catch (Exception e) {
@@ -96,8 +94,7 @@ public class FinManagerDaoImpl implements FinManagerDao {
 						rs.getString(USERNAME).trim(),
 						rs.getString(PASSWORD).trim(),
 						rs.getString(FIRSTNAME).trim(),
-						rs.getString(LASTNAME).trim(),
-						null
+						rs.getString(LASTNAME).trim()
 						);
 				
 				finmanagerList.add(fin);

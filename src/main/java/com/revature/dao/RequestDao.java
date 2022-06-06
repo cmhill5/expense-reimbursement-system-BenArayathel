@@ -10,6 +10,7 @@ public interface RequestDao {
 	public void insertRequest(Request req);
 	
 	public Request selectRequestById(int id);
+	public Request selectOldestRequest();
 	public List<Request> selectRequestsByEmployeeId(Employee emp);
 	public List<Request> selectAllRequests();
 

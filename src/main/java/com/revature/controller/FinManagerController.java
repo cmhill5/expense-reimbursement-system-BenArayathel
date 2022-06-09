@@ -61,6 +61,13 @@ public class FinManagerController {
 		ctx.json(FinManagerService.getRequestQueue());
 	}
 	
+	public static void getLogsByAcceptance(Context ctx){
+
+		boolean isAccepted = Boolean.parseBoolean(ctx.pathParam("isAccepted"));
+		
+		ctx.json(FinManagerService.getLogsByAcceptance(isAccepted));
+	}
+	
 	public static void getLogs(Context ctx){
 		
 		ctx.json(FinManagerService.getLogs());

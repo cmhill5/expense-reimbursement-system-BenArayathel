@@ -34,6 +34,8 @@ public class RequestMapping {
 		
 		app.get("/requests", FinManagerController::getRequestQueue);
 		
+		app.get("/logs/{isAccepted}", FinManagerController::getLogsByAcceptance);
+		
 		app.get("/logs", FinManagerController::getLogs);
 		
 		app.post("/FinManager/{username}/{id}/{isAccepted}", FinManagerController::fromRequestToLog);

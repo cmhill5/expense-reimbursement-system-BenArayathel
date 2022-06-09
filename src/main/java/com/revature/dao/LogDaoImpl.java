@@ -141,6 +141,40 @@ public class LogDaoImpl implements LogDao {
 	}
 
 	@Override
+	public List<Log> selectAllLogsByAcceptance(boolean isAccepted) {
+		String sql = "SELECT * FROM logs";
+		Connection connection = ConnectionFactory.getConnection();
+
+		List<Log> logList = new ArrayList<>();
+		Log log = new Log();
+		
+		try (PreparedStatement ps = connection.prepareStatement(sql)) {
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				if(rs.getBoolean(ISACCEPTED) == isAccepted) {
+					log = new Log(
+							rs.getInt(ID),
+							rs.getTimestamp(LOGTIME),
+							rs.getBoolean(ISACCEPTED),
+							rs.getString(CATEGORY).trim(),
+							rs.getInt(BALANCE)*0.01,
+							rs.getInt(EMP_ID),
+							rs.getInt(FIN_ID)
+							);
+					
+					logList.add(log);
+				}
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return logList;
+	}
+
+	@Override
 	public List<Log> selectAllLogs() {
 		String sql = "SELECT * FROM logs";
 		Connection connection = ConnectionFactory.getConnection();
@@ -167,7 +201,6 @@ public class LogDaoImpl implements LogDao {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			logList = null;
 		}
 		
 		return logList;

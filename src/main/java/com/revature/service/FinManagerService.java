@@ -58,6 +58,12 @@ public class FinManagerService {
 		return requestList;
 	}
 	
+	public static List<Log> getLogsByAcceptance(boolean isAccepted){
+		List<Log> logsList = lDao.selectAllLogsByAcceptance(isAccepted);
+		
+		return logsList;
+	}
+	
 	public static List<Log> getLogs(){
 		List<Log> logsList = lDao.selectAllLogs();
 		

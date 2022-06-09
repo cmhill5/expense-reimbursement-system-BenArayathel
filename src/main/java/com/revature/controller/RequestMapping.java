@@ -1,12 +1,17 @@
 package com.revature.controller;
 
 import io.javalin.Javalin;
+import io.micrometer.prometheus.PrometheusMeterRegistry;
 
 public class RequestMapping {
 
-	public static void configureRoutes(Javalin app) {
+	public static void configureRoutes(Javalin app, PrometheusMeterRegistry registry) {
 		
 		app.get("/", ctx -> ctx.result("Hello there!\nWelcome to P1: Expense Reimbursement System\nby Chance M Hill"));
+		
+		app.get("/metrics", ctx -> {
+			ctx.result(registry.scrape());
+		});
 		
 		//Employee user
 		app.post("/Employee/login", EmployeeController::authenticateByFormParam);

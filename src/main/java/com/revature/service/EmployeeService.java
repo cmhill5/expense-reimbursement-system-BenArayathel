@@ -90,16 +90,18 @@ public class EmployeeService {
 //		}
 	}
 	
-	public static void makeRequest(Employee emp, String category, double balance) {
+	public static boolean makeRequest(Employee emp, String category, double balance) {
 		if(!SystemService.validateCategory(category)) {
-			return;
+			return false;
 		}
 		if(!SystemService.validateBalance(balance)) {
-			return;
+			return false;
 		}
 		
 		Request req = new Request(category, balance, emp.getId());
 		
 		reqDao.insertRequest(req);
+		
+		return true;
 	}
 }

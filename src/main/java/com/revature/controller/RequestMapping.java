@@ -24,5 +24,19 @@ public class RequestMapping {
 		app.post("/Request/{username}/{category}/{balance}", EmployeeController::makeRequest);
 		
 		//Financial Manager user
+		app.post("/FinManager/login", FinManagerController::authenticateByFormParam);
+		
+		app.get("/FinManager/id/{id}", FinManagerController::getFinManagerById);
+		
+		app.get("/FinManager/{username}", FinManagerController::getFinManagerByUsername);
+		
+		app.get("/FinManagers", FinManagerController::getAllFinManagers);
+		
+		app.get("/requests", FinManagerController::getRequestQueue);
+		
+		app.get("/logs", FinManagerController::getLogs);
+		
+		app.post("/FinManager/{username}/{id}/{isAccepted}", FinManagerController::fromRequestToLog);
+		
 	}
 }

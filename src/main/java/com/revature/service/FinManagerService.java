@@ -34,13 +34,13 @@ public class FinManagerService {
 		return result;
 	}
 	
-	public static FinManager getFinManager(int id) {
+	public static FinManager getFinManagerById(int id) {
 		FinManager fin = finDao.selectFinManagerById(id);
 		
 		return fin;
 	}
 	
-	public static FinManager getFinManager(String user) {
+	public static FinManager getFinManagerByUsername(String user) {
 		FinManager fin = finDao.selectFinManagerByName(user);
 		
 		return fin;
@@ -63,28 +63,12 @@ public class FinManagerService {
 		
 		return logsList;
 	}
-	
-	@Transactional
-	public static void fromRequestToLog(int fin_id, int req_id, boolean isAccepted) {
-		
-		try {
-			Request req = reqDao.selectRequestById(req_id);
-			Log l = new Log(isAccepted, req.getCategory(), req.getBalance(), req.getMy_emp_id(), fin_id);
-			
-			lDao.insertLog(l);
-			reqDao.deleteRequest(req);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	@Transactional
-	public static void fromRequestToLog(String finName, int req_id, boolean isAccepted) {
+	public static boolean fromRequestToLog(FinManager fin, int req_id, boolean isAccepted) {
 		
 		try {
 			Request req = reqDao.selectRequestById(req_id);
-			FinManager fin = finDao.selectFinManagerByName(finName);
 			Log l = new Log(isAccepted, req.getCategory(), req.getBalance(), req.getMy_emp_id(), fin.getId());
 			
 			lDao.insertLog(l);
@@ -92,7 +76,9 @@ public class FinManagerService {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			return false;
 		}
+		return true;
 	}
 	
 }

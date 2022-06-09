@@ -84,10 +84,13 @@ public class EmployeeController {
 		String username = ctx.pathParam("username");
 		String category = ctx.pathParam("category");
 		double balance = Double.parseDouble(ctx.pathParam("balance"));
+		
 		Employee emp = EmployeeService.getEmployeeByUsername(username);
 		
-		EmployeeService.makeRequest(emp, category, balance);
+		boolean made = EmployeeService.makeRequest(emp, category, balance);
 		
-		ctx.status(201);
+		if(made){
+			ctx.status(HttpCode.CREATED);
+		}
 	}
 }

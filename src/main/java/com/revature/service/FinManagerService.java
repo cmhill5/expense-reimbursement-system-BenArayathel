@@ -19,54 +19,53 @@ public class FinManagerService {
 	private static FinManagerDao finDao = new FinManagerDaoImpl();
 	private static RequestDao reqDao = new RequestDaoImpl();
 	private static LogDao lDao = new LogDaoImpl();
-	private static SystemService sysServ = new SystemServiceImpl();
 	
-	public boolean finmanagerLogin(String user, String pass) {
+	public static boolean finmanagerLogin(String user, String pass) {
 		boolean result = false;
 		FinManager fin = finDao.selectFinManagerByName(user);
 		
 		if(fin == null) {
 			System.out.println("ERROR: No Financial Manager by this Username");
 		}
-		else if(sysServ.authenticateFin(fin, pass)) {
+		else if(SystemService.authenticateFin(fin, pass)) {
 			result = true;
 		}
 
 		return result;
 	}
 	
-	public FinManager getFinManager(int id) {
+	public static FinManager getFinManager(int id) {
 		FinManager fin = finDao.selectFinManagerById(id);
 		
 		return fin;
 	}
 	
-	public FinManager getFinManager(String user) {
+	public static FinManager getFinManager(String user) {
 		FinManager fin = finDao.selectFinManagerByName(user);
 		
 		return fin;
 	}
 	
-	public List<FinManager> getAllFinManagers(){
+	public static List<FinManager> getAllFinManagers(){
 		List<FinManager> finList = finDao.selectAllFinManagers();
 		
 		return finList;
 	}
 	
-	public List<Request> getRequestQueue(){
+	public static List<Request> getRequestQueue(){
 		List<Request> requestList = reqDao.selectAllRequests();
 		
 		return requestList;
 	}
 	
-	public List<Log> getLogs(){
+	public static List<Log> getLogs(){
 		List<Log> logsList = lDao.selectAllLogs();
 		
 		return logsList;
 	}
 	
 	@Transactional
-	public void fromRequestToLog(int fin_id, int req_id, boolean isAccepted) {
+	public static void fromRequestToLog(int fin_id, int req_id, boolean isAccepted) {
 		
 		try {
 			Request req = reqDao.selectRequestById(req_id);
@@ -81,7 +80,7 @@ public class FinManagerService {
 	}
 
 	@Transactional
-	public void fromRequestToLog(String finName, int req_id, boolean isAccepted) {
+	public static void fromRequestToLog(String finName, int req_id, boolean isAccepted) {
 		
 		try {
 			Request req = reqDao.selectRequestById(req_id);

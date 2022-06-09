@@ -1,0 +1,28 @@
+package com.revature.controller;
+
+import io.javalin.Javalin;
+
+public class RequestMapping {
+
+	public static void configureRoutes(Javalin app) {
+		
+		app.get("/", ctx -> ctx.result("Hello there!\nWelcome to P1: Expense Reimbursement System\nby Chance M Hill"));
+		
+		//Employee user
+		app.post("/Employee/login", EmployeeController::authenticateByFormParam);
+		
+		app.get("/Employee/{username}", EmployeeController::getEmployeeByUsername);
+		
+		app.get("/Employee/id/{id}", EmployeeController::getEmployeeById);
+		
+		app.get("/Employees", EmployeeController::getAllEmployees);
+		
+		app.get("/Employee/{username}/requests", EmployeeController::viewRequests);
+		
+		app.get("/Employee/{username}/logs", EmployeeController::viewLogs);
+		
+		app.post("/Request/{username}/{category}/{balance}", EmployeeController::makeRequest);
+		
+		//Financial Manager user
+	}
+}

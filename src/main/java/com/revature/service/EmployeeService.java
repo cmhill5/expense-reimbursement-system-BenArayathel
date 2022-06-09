@@ -18,39 +18,48 @@ public class EmployeeService {
 	private static EmployeeDao empDao = new EmployeeDaoImpl();
 	private static RequestDao reqDao = new RequestDaoImpl();
 	private static LogDao lDao = new LogDaoImpl();
-	private static SystemService sysServ = new SystemServiceImpl();
 	
-	public boolean employeeLogin(String user, String pass) {
+	public static boolean employeeLogin(String user, String pass) {
 		boolean result = false;
 		Employee emp = empDao.selectEmployeeByName(user);
 		
 		if(emp == null) {
 			System.out.println("ERROR: No Employee by this Username");
 		}
-		else if(sysServ.authenticateEmp(emp, pass)) {
+		else if(SystemService.authenticateEmp(emp, pass)) {
 			result = true;
 		}
 		
 		return result;
 	}
 	
-	public Employee getEmployee(String user) {
+	public static Employee getEmployeeByUsername(String user) {
 		Employee emp = empDao.selectEmployeeByName(user);
+		
+		if(emp == null) {
+			return null;
+		}
+		
 		emp.setMyRequests(reqDao.selectRequestsByEmployeeId(emp));
 		emp.setMyLogs(lDao.selectLogsByEmployeeId(emp));
 		
 		return emp;
 	}
 	
-	public Employee getEmployee(int id) {
+	public static Employee getEmployeeById(int id) {
 		Employee emp = empDao.selectEmployeeById(id);
+		
+		if(emp == null) {
+			return null;
+		}
+		
 		emp.setMyRequests(reqDao.selectRequestsByEmployeeId(emp));
 		emp.setMyLogs(lDao.selectLogsByEmployeeId(emp));
 		
 		return emp;
 	}
 	
-	public List<Employee> getAllEmployees(){
+	public static List<Employee> getAllEmployees(){
 		List<Employee> employeeList = empDao.selectAllEmployees();
 		
 //		for(Employee emp: employeeList) {
@@ -61,36 +70,36 @@ public class EmployeeService {
 		return employeeList;
 	}
 	
-	public void viewRequests(Employee emp) {
+	public static List<Request> viewRequests(Employee emp) {
 		List<Request> requestList = emp.getMyRequests();
 		
-		System.out.println(requestList);
+		return requestList;
 		
 //		for(Request req: requestList) {
 //			System.out.println(req);
 //		}
 	}
 	
-	public void makeRequest(Employee emp, String category, double balance) {
-		if(!sysServ.validateCategory(category)) {
+	public static List<Log> viewLogs(Employee emp) {
+		List<Log> logList = emp.getMyLogs();
+		
+		return logList;
+		
+//		for(Log l: logList) {
+//			System.out.println(l);
+//		}
+	}
+	
+	public static void makeRequest(Employee emp, String category, double balance) {
+		if(!SystemService.validateCategory(category)) {
 			return;
 		}
-		if(!sysServ.validateBalance(balance)) {
+		if(!SystemService.validateBalance(balance)) {
 			return;
 		}
 		
 		Request req = new Request(category, balance, emp.getId());
 		
 		reqDao.insertRequest(req);
-	}
-	
-	public void viewLogs(Employee emp) {
-		List<Log> logList = emp.getMyLogs();
-		
-		System.out.println(logList);
-		
-//		for(Log l: logList) {
-//			System.out.println(l);
-//		}
 	}
 }

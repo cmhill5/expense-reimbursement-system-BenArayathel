@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.postgresql.util.PSQLException;
+
 import com.revature.models.FinManager;
 import com.revature.util.ConnectionFactory;
 
@@ -39,6 +41,8 @@ public class FinManagerDaoImpl implements FinManagerDao {
 					rs.getString(LASTNAME).trim()
 					);
 			
+		} catch (PSQLException psqlE) {
+			fin = null;
 		} catch (Exception e) {
 			e.printStackTrace();
 			fin = null;
@@ -69,6 +73,8 @@ public class FinManagerDaoImpl implements FinManagerDao {
 					rs.getString(LASTNAME).trim()
 					);
 			
+		} catch (PSQLException psqlE) {
+			fin = null;
 		} catch (Exception e) {
 			e.printStackTrace();
 			fin = null;

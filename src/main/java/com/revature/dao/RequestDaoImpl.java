@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.revature.models.Employee;
-import com.revature.models.Log;
 import com.revature.models.Request;
 import com.revature.util.ConnectionFactory;
 
@@ -131,7 +130,7 @@ public class RequestDaoImpl implements RequestDao {
 
 	@Override
 	public List<Request> selectAllRequests() {
-		String sql = "SELECT * FROM requests;";
+		String sql = "SELECT * FROM requests ORDER BY senttime;";
 		
 		Connection connection = ConnectionFactory.getConnection();
 		List<Request> requestList = new ArrayList<>();

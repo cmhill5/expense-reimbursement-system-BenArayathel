@@ -53,10 +53,10 @@ public class EmployeeService {
 	public List<Employee> getAllEmployees(){
 		List<Employee> employeeList = empDao.selectAllEmployees();
 		
-		for(Employee emp: employeeList) {
-			emp.setMyRequests(reqDao.selectRequestsByEmployeeId(emp));
-			emp.setMyLogs(lDao.selectLogsByEmployeeId(emp));
-		}
+//		for(Employee emp: employeeList) {
+//			emp.setMyRequests(reqDao.selectRequestsByEmployeeId(emp));
+//			emp.setMyLogs(lDao.selectLogsByEmployeeId(emp));
+//		}
 		
 		return employeeList;
 	}
@@ -64,9 +64,11 @@ public class EmployeeService {
 	public void viewRequests(Employee emp) {
 		List<Request> requestList = emp.getMyRequests();
 		
-		for(Request req: requestList) {
-			System.out.println(req);
-		}
+		System.out.println(requestList);
+		
+//		for(Request req: requestList) {
+//			System.out.println(req);
+//		}
 	}
 	
 	public void makeRequest(Employee emp, String category, double balance) {
@@ -85,8 +87,10 @@ public class EmployeeService {
 	public void viewLogs(Employee emp) {
 		List<Log> logList = emp.getMyLogs();
 		
-		for(Log l: logList) {
-			System.out.println(l);
-		}
+		System.out.println(logList);
+		
+//		for(Log l: logList) {
+//			System.out.println(l);
+//		}
 	}
 }

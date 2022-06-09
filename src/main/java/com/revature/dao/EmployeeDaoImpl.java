@@ -42,6 +42,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 					null
 					);
 			
+		} catch (PSQLException psqlE) {
+			emp = null;
 		} catch (Exception e) {
 			e.printStackTrace();
 			emp = null;

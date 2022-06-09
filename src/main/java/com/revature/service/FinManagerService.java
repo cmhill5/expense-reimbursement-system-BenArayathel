@@ -2,13 +2,14 @@ package com.revature.service;
 
 import java.util.List;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.revature.dao.FinManagerDao;
 import com.revature.dao.FinManagerDaoImpl;
 import com.revature.dao.LogDao;
 import com.revature.dao.LogDaoImpl;
 import com.revature.dao.RequestDao;
 import com.revature.dao.RequestDaoImpl;
-import com.revature.models.Employee;
 import com.revature.models.FinManager;
 import com.revature.models.Log;
 import com.revature.models.Request;
@@ -46,6 +47,12 @@ public class FinManagerService {
 		return fin;
 	}
 	
+	public List<FinManager> getAllFinManagers(){
+		List<FinManager> finList = finDao.selectAllFinManagers();
+		
+		return finList;
+	}
+	
 	public List<Request> getRequestQueue(){
 		List<Request> requestList = reqDao.selectAllRequests();
 		
@@ -58,6 +65,7 @@ public class FinManagerService {
 		return logsList;
 	}
 	
+	@Transactional
 	public void fromRequestToLog(int fin_id, int req_id, boolean isAccepted) {
 		
 		try {
@@ -71,7 +79,8 @@ public class FinManagerService {
 			e.printStackTrace();
 		}
 	}
-	
+
+	@Transactional
 	public void fromRequestToLog(String finName, int req_id, boolean isAccepted) {
 		
 		try {

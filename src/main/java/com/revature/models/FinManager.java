@@ -53,7 +53,7 @@ public class FinManager {
 	}
 	@Override
 	public String toString() {
-		return "FinManager [id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName
+		return "\nFinManager [id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName
 				+ ", lastName=" + lastName + "]";
 	}
 	@Override

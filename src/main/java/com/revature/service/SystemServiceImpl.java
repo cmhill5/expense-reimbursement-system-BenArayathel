@@ -46,10 +46,8 @@ public class SystemServiceImpl implements SystemService {
 
 	@Override
 	public boolean validateCategory(String category) {
-
-		String[] categoryList = {"LODGING", "TRAVEL", "FOOD", "OTHER"};
 		
-		if(Arrays.binarySearch(categoryList, category) > 0 ) {
+		if(category.equals("LODGING") || category.equals("TRAVEL") || category.equals("FOOD") || category.equals("OTHER")) {
 			return true;
 		}
 		else {

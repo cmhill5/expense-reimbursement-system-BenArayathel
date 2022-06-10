@@ -13,8 +13,6 @@ public class RequestMapping {
 			ctx.result(registry.scrape());
 		});
 		
-		app.get("/env", ctx -> ctx.result((System.getenv("db_url")+"\n"+System.getenv("db_username")+"\n"+System.getenv("db_password"))));
-		
 		//Employee user
 		app.post("/Employee/login", EmployeeController::authenticateByFormParam);
 		

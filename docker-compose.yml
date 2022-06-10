@@ -1,0 +1,10 @@
+services:
+  P1_ERSapi:
+    image: 'p1-ers-api'
+    container_name: p1-ers
+    ports:
+      - 7465:7465
+    environment:
+      - db_url=jdbc:postgresql://database-p1.cqhd8rudluf1.us-east-1.rds.amazonaws.com:5432/postgres
+      - db_username=java_login
+      - db_password=r3vDiceRace

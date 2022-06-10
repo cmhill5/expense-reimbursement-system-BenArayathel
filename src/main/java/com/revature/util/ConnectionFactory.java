@@ -12,13 +12,9 @@ public class ConnectionFactory {
 	//Is going to control our connection to our database. 
 	// It will deal with all the configuration details, and simply return a Connection. 
 	
-//	private static String URL = System.getenv("db_url");
-//	private static String USERNAME = System.getenv("db_username");
-//	private static String PASSWORD = System.getenv("db_password");
-	
-	private static String URL = "jdbc:postgresql://database-p1.cqhd8rudluf1.us-east-1.rds.amazonaws.com:5432/postgres";
-	private static String USERNAME = "java_login";
-	private static String PASSWORD = "r3vDiceRace";
+	private static String URL = System.getenv("db_url");
+	private static String USERNAME = System.getenv("db_username");
+	private static String PASSWORD = System.getenv("db_password");
 	
 	private static Connection connection;
 	

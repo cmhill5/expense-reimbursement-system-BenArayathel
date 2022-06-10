@@ -8,3 +8,17 @@ services:
       - db_url=jdbc:postgresql://database-p1.cqhd8rudluf1.us-east-1.rds.amazonaws.com:5432/postgres
       - db_username=java_login
       - db_password=r3vDiceRace
+  prom:
+    image: 'prom/prometheus'
+    container_name: prom
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - 9090:9090
+  graf:
+    image: 'grafana/grafana'
+    ports:
+      - 8000:3000
+    environment:
+      - TERM=linux
+      - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-piechart-panel,grafana-polystat-panel

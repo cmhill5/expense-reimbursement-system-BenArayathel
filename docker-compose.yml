@@ -1,6 +1,6 @@
 services:
   P1_ERSapi:
-    image: 'p1-ers-api'
+    image: 'chance562/p1-ers-api:new'
     container_name: p1-ers
     ports:
       - 7465:7465
@@ -11,14 +11,5 @@ services:
   prom:
     image: 'prom/prometheus'
     container_name: prom
-    volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
     ports:
       - 9090:9090
-  graf:
-    image: 'grafana/grafana'
-    ports:
-      - 8000:3000
-    environment:
-      - TERM=linux
-      - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-piechart-panel,grafana-polystat-panel
